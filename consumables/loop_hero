@@ -22,42 +22,34 @@ SMODS.Consumable({
         return #G.hand.cards > 0
     end,
     use = function(self, card, area, copier)
-
         local random_indexes = SARC.get_rand_hand_index(math.min(self.config.targets, #G.hand.cards),nil)
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             delay = 0.2,
             blocking = true,
             func = function()
-      
                 return true
             end
         }))
-        for _, v in pairs(random_indexes) do
+        local removed = {}
+        for _, v in ipairs(random_indexes) do
+            table.insert(removed, G.hand.cards[v])
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
-
                 delay = 0.05,
                 func = function()
-
                     play_sound('crumple1')
-
                     G.hand.cards[v]:start_dissolve()
-
                     return true
                 end
             }))
-
         end
-        for i = 1, #G.jokers.cards do
-            G.jokers.cards[i]:calculate_joker({remove_playing_cards = true, removed = random_indexes})
-        end
+        SMODS.calculate_context({remove_playing_cards = true, removed = removed})
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             delay = 0.1,
             blocking = true,
             func = function()
-      
                 return true
             end
         }))
@@ -69,9 +61,7 @@ SMODS.Consumable({
                     draw_card(G.deck, G.hand, i * 100 / 2, 'up', true)
                     return true
                 end
-
             }))
         end
     end
-
 })
