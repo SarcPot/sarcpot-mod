@@ -6,12 +6,11 @@ priority = 0
 [[patches]]
 [patches.pattern]
 target = "functions/state_events.lua"
-pattern = "if G.GAME.blind:get_type() == 'Boss' then"
+pattern = "SMODS%.ante_end = nil; delay%(%0%.4%); check_for_unlock"
 position = "after"
 match_indent = true
 payload = '''
-if G.GAME.expedition_active == true then      
-            G.GAME.expedition_active = false
-            G.GAME.expedition_key = nil
-        end
+error("PATCH HIT")
 '''
+
+

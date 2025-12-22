@@ -1,22 +1,22 @@
 SMODS.Blind {
     atlas = 'blinds',
     expedition = true,
-    key = "ex_fortune",
+    key = "ex_owl",
     dollars = 10,
     mult = 2,
     pos = {
         x = 0,
-        y = 1
+        y = 5
     },
     loc_vars = function(self)
         return {
-            vars = {3}
+            vars = {}
         }
     end,
     palette = {
-        new_colour = HEX("ebd096"),
-        special_colour = lighten(HEX("ebd096"), 0.4),
-        tertiary_colour = HEX("b84456"),
+        new_colour = HEX("1f594a"),
+        special_colour = lighten(HEX("1f594a"), 0.4),
+        tertiary_colour = HEX("33d68d"),
         contrast = 3
     },
     boss_palette = {
@@ -31,13 +31,7 @@ SMODS.Blind {
     end,
     boss_colour = HEX("f25e75"),
     calculate = function(self, blind, context)
-        if not blind.disabled then
-            if context.mod_probability then
-                return {
-                    numerator = context.numerator * 3
-                }
-            end
-        end
+
     end,
     disable = function(self)
 

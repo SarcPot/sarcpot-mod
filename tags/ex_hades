@@ -1,9 +1,9 @@
 SMODS.Tag({
-    key = 'ex_summit',
+    key = 'ex_hades',
     atlas = 'tags',
     pos = {
-        x = 1,
-        y = 0
+        x = 0,
+        y = 1
     },
     discovered = false,
     loc_vars = function(self, info_queue, card)
@@ -11,10 +11,10 @@ SMODS.Tag({
             key = "sarc_expedition_tip",
             set = "Other"
         }
-        info_queue[#info_queue + 1] = {
-            key = "sarc_summit_tip",
+        --[[info_queue[#info_queue + 1] = {
+            key = "sarc_hades_tip",
             set = "Other"
-        }
+        }]] --
 
         return {
             vars = {}
@@ -25,7 +25,8 @@ SMODS.Tag({
         return false
     end,
     apply = function(self, tag, context)
-        if context.type == 'eval' and G.GAME.last_blind and G.GAME.last_blind.boss and SARC.can_be_expedition() then
+        if context.type == 'eval' and context.end_of_round and not context.main_eval and G.GAME.blind.boss and
+            SARC.can_be_expedition() then
             G.GAME.expedition_active = true
             -- yes, i know this bit of code is repeated. trust me, it works well enough so please don't judge me
             G.E_MANAGER:add_event(Event({
@@ -36,7 +37,7 @@ SMODS.Tag({
                 func = function()
                     tag:yep('+', G.C.GOLD, function()
                         G.GAME.expedition_active = true
-                        G.GAME.expedition_key = 'bl_sarc_ex_summit'
+                        G.GAME.expedition_key = 'bl_sarc_ex_hades'
 
                         return true
                     end)

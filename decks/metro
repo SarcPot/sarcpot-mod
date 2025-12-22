@@ -5,9 +5,7 @@ SMODS.Back {
         x = 0,
         y = 0
     },
-    config = {
-        activated = false
-    },
+    config = {},
 
     loc_vars = function(self, info_queue)
         return {
@@ -18,7 +16,7 @@ SMODS.Back {
     end,
     calculate = function(self, card, context)
 
-        if self.config.activated ~= true and context.starting_shop and G.GAME.round_resets.ante == 4 then
+        if G.GAME.metro_activated ~= true and context.starting_shop and G.GAME.round_resets.ante == 4 then
 
             G.E_MANAGER:add_event(Event {
                 func = function()
@@ -29,7 +27,7 @@ SMODS.Back {
                     return true
                 end
             })
-            self.config.activated = true
+            G.GAME.metro_activated = true
         end
     end
 

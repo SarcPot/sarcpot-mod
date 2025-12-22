@@ -2,7 +2,7 @@ SMODS.Blind {
     atlas = 'blinds',
     expedition = true,
     key = "ex_gris",
-    dollars = 5,
+    dollars = 10,
     mult = 2,
     pos = {
         x = 0,

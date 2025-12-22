@@ -8,7 +8,7 @@ SMODS.Consumable({
     },
     discovered = false,
     config = {
-        max_highlighted = 3
+        max_highlighted = 4
     },
     loc_vars = function(self, info_queue)
         return {
@@ -24,38 +24,42 @@ SMODS.Consumable({
     use = function(self, card, area, copier)
 
         local leftmost = G.hand.highlighted[1]
-        for i=1, #G.hand.highlighted do if G.hand.highlighted[i].T.x < leftmost.T.x then leftmost = G.hand.highlighted[i] end end
+        for i = 1, #G.hand.highlighted do
+            if G.hand.highlighted[i].T.x < leftmost.T.x then
+                leftmost = G.hand.highlighted[i]
+            end
+        end
         local selected_suit = leftmost.base.suit
         G.E_MANAGER:add_event(Event({
-                trigger = 'after',
-                delay = 0.5,
-                func = function()
-                    return true
-                end
-            }))
-        
+            trigger = 'after',
+            delay = 0.5,
+            func = function()
+                return true
+            end
+        }))
+
         for i = 1, #G.hand.highlighted do
             if not G.hand.highlighted[i] ~= leftmost then
-                 G.E_MANAGER:add_event(Event({
-                trigger = 'after',
-                delay = 0.2,
-                func = function()
-                    play_sound('tarot1',(math.random(8,12)/10))
-                    G.hand.highlighted[i]:juice_up()
-                    SMODS.change_base(G.hand.highlighted[i], selected_suit,nil)
-                    return true
-                end
-            }))
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    delay = 0.2,
+                    func = function()
+                        play_sound('tarot1', (math.random(8, 12) / 10))
+                        G.hand.highlighted[i]:juice_up()
+                        SMODS.change_base(G.hand.highlighted[i], selected_suit, nil)
+                        return true
+                    end
+                }))
             end
         end
         G.E_MANAGER:add_event(Event({
-                trigger = 'after',
-                delay = 0.4,
-                func = function()
-                       SMODS.destroy_cards(leftmost)
-                    return true
-                end
-            }))
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                SMODS.destroy_cards(leftmost)
+                return true
+            end
+        }))
 
         --[[for i = 1, #G.hand.highlighted do
             local random_index = math.random(1, #filtered_playing_cards)

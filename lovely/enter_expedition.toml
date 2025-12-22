@@ -6,13 +6,14 @@ priority = 0
 [[patches]]
 [patches.pattern]
 target = "functions/common_events.lua"
-pattern = "G.GAME.round_resets.blind_choices.Boss = get_new_boss()"
-position = "at"
+pattern = "function get_new_boss()"
+position = "after"
 match_indent = true
 payload = '''
-if G.GAME.expedition_active == true and G.GAME.expedition_key then      
-            G.GAME.round_resets.blind_choices.Boss = G.GAME.expedition_key
-            else
-            G.GAME.round_resets.blind_choices.Boss = get_new_boss()
-        end
+if G.GAME.expedition_key then      
+    print("EXPEDITION BOSS SELECTED: " .. G.GAME.expedition_key)
+    return G.GAME.expedition_key
+else
+    print("No expedition key found")
+end
 '''

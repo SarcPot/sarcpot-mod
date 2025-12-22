@@ -30,7 +30,7 @@ SMODS.Tag({
             -- yes, i know this bit of code is repeated. trust me, it works well enough so please don't judge me
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
-                delay = 0.1,
+
                 blocking = true,
                 blockable = true,
                 func = function()

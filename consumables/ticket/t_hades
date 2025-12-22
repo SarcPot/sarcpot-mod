@@ -1,30 +1,28 @@
 SMODS.Consumable({
-    key = 'going_under',
-    set = 'travel',
-    atlas = 'consumables',
+    key = 't_hades',
+    set = 'ticket',
+    atlas = 'tickets',
     pos = {
-        x = 3,
-        y = 3
+        x = 2,
+        y = 0
     },
     discovered = false,
     config = {},
-    keep_on_use = function(self, card)
-        return false
-    end,
+    cost = 3,
     loc_vars = function(self, info_queue)
         info_queue[#info_queue + 1] = {
-            key = 'tag_voucher',
-            set = 'Tag'
+            key = "sarc_expedition_tip",
+            set = "Other"
         }
-        return {
-            vars = {}
-        }
+        --[[info_queue[#info_queue + 1] = {
+            key = "sarc_hades_tip",
+            set = "Other"
+        }]] --
+
     end,
-    cost = 3,
     can_use = function(self, card)
         return true
     end,
-
     use = function(self, card, area, copier)
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
@@ -33,9 +31,10 @@ SMODS.Consumable({
                 play_sound('generic1', 0.9 + math.random() * 0.1, 0.8)
                 play_sound('holo1', 1.2 + math.random() * 0.1, 0.4)
                 card:juice_up(0.3, 0.5)
-                add_tag(Tag('tag_voucher'))
+                add_tag(Tag('tag_sarc_ex_hades'))
                 return true
             end
         }))
     end
+
 })

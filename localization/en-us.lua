@@ -63,11 +63,19 @@ return {
             },
             bl_sarc_ex_radiance = {
                 name = "Radiance",
-                text = {"Copies first scored card #1# times"}
+                text = {"Copies first", "scored card #1# times"}
             },
             bl_sarc_ex_gris = {
                 name = "In Your Hands",
                 text = {"+#1# handsize permanently"}
+            },
+            bl_sarc_ex_hades = {
+                name = "God of the Dead",
+                text = {"Enhances first hand", "played and held"}
+            },
+            bl_sarc_ex_owl = {
+                name = "Claws and Feathers",
+                text = {"Reroll first joker sold", "into a higher rarity"}
             }
 
         },
@@ -120,11 +128,11 @@ return {
             },
             c_sarc_going_under = {
                 name = 'Soulless Marketing',
-                text = {"Create a {C:attention}Voucher Tag{}", "Gain {C:money}+#1#${}"}
+                text = {"Create a {C:attention}Voucher Tag{}"}
             },
             c_sarc_greenpath = {
                 name = '"View from Greenpath"',
-                text = {"Create an {C:uncommon}Uncommon Tag{} "}
+                text = {"Create an {C:uncommon}Uncommon Tag{}", "Gain {C:money}+#1#${}"}
             },
             c_sarc_haven = {
                 name = 'Rusted Poster',

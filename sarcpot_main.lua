@@ -243,6 +243,7 @@ function Game:init_game_object()
     ret.expedition_active = false
     ret.expedition_key = nil
     ret.expedition_used = false
+    ret.metro_activated = false
     return ret
 end
 
@@ -254,6 +255,7 @@ function SMODS.current_mod.reset_game_globals(run_start)
         G.GAME.expedition_active = false
         G.GAME.expedition_key = nil
         G.GAME.expedition_used = false
+        G.GAME.metro_activated = false
     end
 end
 
@@ -643,15 +645,19 @@ end
 
 function SARC.can_be_expedition()
     local result = true
+    local string_res = ""
     if G.GAME.expedition_active ~= false then
         result = false
     end
     if G.GAME.round_resets.ante % G.GAME.win_ante == 0 then
         result = false
     end
-    if SARC.aij_present and G.GAME.round_resets.ante % G.GAME.win_ante == G.GAME.win_ante / 2 then
-        result = false
+    if result then
+        string_res = "true"
+    else
+        string_res = "false"
     end
+    print('Can be expedition = ' .. string_res)
     return result
 end
 

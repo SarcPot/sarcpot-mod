@@ -1,9 +1,9 @@
 SMODS.Tag({
-    key = 'ex_summit',
+    key = 'ex_owl',
     atlas = 'tags',
     pos = {
         x = 1,
-        y = 0
+        y = 1
     },
     discovered = false,
     loc_vars = function(self, info_queue, card)
@@ -11,10 +11,10 @@ SMODS.Tag({
             key = "sarc_expedition_tip",
             set = "Other"
         }
-        info_queue[#info_queue + 1] = {
-            key = "sarc_summit_tip",
+        --[[info_queue[#info_queue + 1] = {
+            key = "sarc_owl_tip",
             set = "Other"
-        }
+        }]] --
 
         return {
             vars = {}
@@ -32,11 +32,11 @@ SMODS.Tag({
                 trigger = 'after',
 
                 blocking = true,
-
+                blockable = true,
                 func = function()
                     tag:yep('+', G.C.GOLD, function()
                         G.GAME.expedition_active = true
-                        G.GAME.expedition_key = 'bl_sarc_ex_summit'
+                        G.GAME.expedition_key = 'bl_sarc_ex_owl'
 
                         return true
                     end)
