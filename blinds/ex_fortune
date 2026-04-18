@@ -1,0 +1,45 @@
+SMODS.Blind {
+    atlas = 'blinds',
+    expedition = true,
+    key = "ex_fortune",
+    dollars = 10,
+    mult = 2,
+    pos = {
+        x = 0,
+        y = 1
+    },
+    loc_vars = function(self)
+        return {
+            vars = {3}
+        }
+    end,
+    palette = {
+        new_colour = HEX("ebd096"),
+        special_colour = lighten(HEX("ebd096"), 0.4),
+        tertiary_colour = HEX("b84456"),
+        contrast = 3
+    },
+    boss_palette = {
+        new_colour = HEX("f25e75"),
+        special_colour = HEX("21406b"),
+        tertiary_colour = darken(HEX("21406b"), 0.2),
+        contrast = 2
+    },
+    boss = {},
+    in_pool = function(self)
+        return false
+    end,
+    boss_colour = HEX("f25e75"),
+    calculate = function(self, blind, context)
+        if not blind.disabled then
+            if context.mod_probability then
+                return {
+                    numerator = context.numerator * 3
+                }
+            end
+        end
+    end,
+    disable = function(self)
+
+    end
+}

@@ -1,0 +1,34 @@
+SMODS.Back {
+    key = 'metro',
+    atlas = 'decks',
+    pos = {
+        x = 0,
+        y = 0
+    },
+    config = {},
+
+    loc_vars = function(self, info_queue)
+        return {
+            vars = {
+                colours = {G.SP.C.ticket_1}
+            }
+        }
+    end,
+    calculate = function(self, card, context)
+
+        if G.GAME.metro_activated ~= true and context.starting_shop and G.GAME.round_resets.ante == 4 then
+
+            G.E_MANAGER:add_event(Event {
+                func = function()
+                    local key = 'p_sarc_ticket'
+                    local booster = SMODS.add_booster_to_shop(key)
+                    booster.ability.couponed = true
+                    booster:set_cost()
+                    return true
+                end
+            })
+            G.GAME.metro_activated = true
+        end
+    end
+
+}

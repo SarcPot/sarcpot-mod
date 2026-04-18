@@ -1,0 +1,19 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "function get_new_boss()"
+position = "after"
+match_indent = true
+payload = '''
+if G.GAME.expedition_key then      
+    print("EXPEDITION BOSS SELECTED: " .. G.GAME.expedition_key)
+    return G.GAME.expedition_key
+else
+    print("No expedition key found")
+end
+'''

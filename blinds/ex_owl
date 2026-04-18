@@ -1,0 +1,39 @@
+SMODS.Blind {
+    atlas = 'blinds',
+    expedition = true,
+    key = "ex_owl",
+    dollars = 10,
+    mult = 2,
+    pos = {
+        x = 0,
+        y = 5
+    },
+    loc_vars = function(self)
+        return {
+            vars = {}
+        }
+    end,
+    palette = {
+        new_colour = HEX("1f594a"),
+        special_colour = lighten(HEX("1f594a"), 0.4),
+        tertiary_colour = HEX("33d68d"),
+        contrast = 3
+    },
+    boss_palette = {
+        new_colour = HEX("f25e75"),
+        special_colour = HEX("21406b"),
+        tertiary_colour = darken(HEX("21406b"), 0.2),
+        contrast = 2
+    },
+    boss = {},
+    in_pool = function(self)
+        return false
+    end,
+    boss_colour = HEX("f25e75"),
+    calculate = function(self, blind, context)
+
+    end,
+    disable = function(self)
+
+    end
+}

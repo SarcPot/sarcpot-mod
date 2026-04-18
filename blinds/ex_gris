@@ -1,0 +1,42 @@
+SMODS.Blind {
+    atlas = 'blinds',
+    expedition = true,
+    key = "ex_gris",
+    dollars = 10,
+    mult = 2,
+    pos = {
+        x = 0,
+        y = 3
+    },
+    loc_vars = function(self)
+        return {
+            vars = {1}
+        }
+    end,
+    palette = {
+        new_colour = HEX("d7d9d9"),
+        special_colour = HEX("626363"),
+        tertiary_colour = HEX("d2d4d4"),
+        contrast = 4
+    },
+    boss_palette = {
+        new_colour = HEX("faf3e6"),
+        special_colour = HEX("387585"),
+        tertiary_colour = HEX("4da1a1"),
+        contrast = 3
+    },
+    boss = {},
+    in_pool = function(self)
+        return false
+    end,
+    boss_colour = HEX("4da1a1"),
+    calculate = function(self, blind, context)
+        if not blind.disabled then
+            if context.setting_blind then
+                G.hand:change_size(1)
+            end
+        end
+    end,
+    disable = function(self)
+    end
+}

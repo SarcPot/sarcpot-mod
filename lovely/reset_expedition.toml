@@ -1,0 +1,16 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "SMODS%.ante_end = nil; delay%(%0%.4%); check_for_unlock"
+position = "after"
+match_indent = true
+payload = '''
+error("PATCH HIT")
+'''
+
+

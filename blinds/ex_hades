@@ -1,0 +1,74 @@
+SMODS.Blind {
+    atlas = 'blinds',
+    expedition = true,
+    key = "ex_hades",
+    dollars = 10,
+    mult = 2,
+    pos = {
+        x = 0,
+        y = 4
+    },
+    loc_vars = function(self)
+        return {
+            vars = {}
+        }
+    end,
+    palette = {
+        new_colour = HEX("33d68d"),
+        special_colour = darken(HEX("1f594a"), 0.4),
+        tertiary_colour = HEX("1f594a"),
+        contrast = 3
+    },
+    boss_palette = {
+        new_colour = HEX("e64919"),
+        special_colour = HEX("4a0f0f"),
+        tertiary_colour = darken(HEX("4a0f0f"), 0.2),
+        contrast = 2
+    },
+    boss = {},
+    in_pool = function(self)
+        return false
+    end,
+    boss_colour = HEX("e64919"),
+    calculate = function(self, blind, context)
+        if context.before and G.GAME.current_round.hands_played == 0 then
+            local new_enhancement = SMODS.poll_enhancement({
+                guaranteed = true,
+                key = 'magic_survival'
+            })
+            for _, v in pairs(context.full_hand) do
+
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    blocking = true,
+                    delay = 0.2,
+                    func = function()
+                        play_sound('tarot1', (math.random(8, 12) / 10))
+                        v:juice_up()
+                        v:set_ability(G.P_CENTERS[new_enhancement])
+                        return true
+                    end
+                }))
+
+            end
+            for _, v in pairs(G.hand.cards) do
+
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    blocking = true,
+                    delay = 0.2,
+                    func = function()
+                        play_sound('tarot1', (math.random(8, 12) / 10))
+                        v:juice_up()
+                        v:set_ability(G.P_CENTERS[new_enhancement])
+                        return true
+                    end
+                }))
+
+            end
+        end
+    end,
+    disable = function(self)
+
+    end
+}
