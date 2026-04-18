@@ -22,7 +22,7 @@ SMODS.Joker {
         y = 3
     },
     cost = 5,
-
+    attributes = {'chance', 'discard', 'hands', 'rank'},
     calculate = function(self, card, context)
         local count = {}
         local found = false

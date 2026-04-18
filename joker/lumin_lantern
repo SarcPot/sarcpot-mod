@@ -21,7 +21,7 @@ SMODS.Joker {
     blueprint_compat = false,
     eternal_compat = true,
     soul_pos = nil,
-
+    attributes = {'enhancements', 'passive'},
     in_pool = function(self, args)
         if G.playing_cards then
             for i = 1, #G.playing_cards do

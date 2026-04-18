@@ -4,7 +4,7 @@ SMODS.Joker {
         extra = {
             mult = 12,
             chips = 100,
-            state = 1,
+            state = 1
         }
     },
     add_to_deck = function(self, card, from_debuff)
@@ -12,24 +12,43 @@ SMODS.Joker {
     end,
     update = function(self, card, dt)
         if card.ability.extra.state == 1 then
-            card.children.center:set_sprite_pos({x = 3, y = 3})
+            card.children.center:set_sprite_pos({
+                x = 3,
+                y = 3
+            })
         elseif card.ability.extra.state == 2 then
-            card.children.center:set_sprite_pos({x = 1, y = 4})
+            card.children.center:set_sprite_pos({
+                x = 1,
+                y = 4
+            })
         else
-            card.children.center:set_sprite_pos({x = 0, y = 4})
+            card.children.center:set_sprite_pos({
+                x = 0,
+                y = 4
+            })
         end
     end,
     loc_vars = function(self, info_queue, card)
         if G.GAME.current_round.hands_left > G.GAME.current_round.discards_left then
-            return {vars = {'+'..card.ability.extra.chips,localize('sarc_chips'),'',''}}
+            return {
+                vars = {'+' .. card.ability.extra.chips, localize('sarc_chips'), '', ''}
+            }
         elseif G.GAME.current_round.hands_left == G.GAME.current_round.discards_left then
-            return {vars = {'+'..card.ability.extra.chips,localize('sarc_chips')..',','+'..card.ability.extra.mult,localize('sarc_mult')}}
+            return {
+                vars = {'+' .. card.ability.extra.chips, localize('sarc_chips') .. ',', '+' .. card.ability.extra.mult,
+                        localize('sarc_mult')}
+            }
         else
-            return {vars = {'','','+'..card.ability.extra.mult,localize('sarc_mult')}}
+            return {
+                vars = {'', '', '+' .. card.ability.extra.mult, localize('sarc_mult')}
+            }
         end
     end,
     rarity = 2,
-    pos = { x = 3, y = 3 },
+    pos = {
+        x = 3,
+        y = 3
+    },
     atlas = 'sarcpot_atlas',
     cost = 7,
     unlocked = true,
@@ -37,8 +56,9 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = true,
     soul_pos = nil,
+    attributes = {'mult', 'chips', 'hands', 'discard', 'pride'},
     calculate = function(self, card, context)
-        if context.after or (context.hands_updated and context.hands_mod>0) or context.setting_blind then
+        if context.after or (context.hands_updated and context.hands_mod > 0) or context.setting_blind then
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 delay = 0.2,
@@ -56,14 +76,14 @@ SMODS.Joker {
                         card:juice_up()
                         play_sound('tarot1')
                     end
-                    
+
                     return true
-            end}))
-            
+                end
+            }))
 
         end
         if context.discards_updated then
-                
+
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 delay = 0.2,
@@ -82,22 +102,23 @@ SMODS.Joker {
                         play_sound('tarot1')
                     end
                     return true
-            end}))
+                end
+            }))
         end
         if context.joker_main then
-            if card.ability.extra.state==1 then
-                return{
+            if card.ability.extra.state == 1 then
+                return {
                     mult = card.ability.extra.mult
                 }
-            elseif card.ability.extra.state==2 then
-                return{
+            elseif card.ability.extra.state == 2 then
+                return {
                     mult = card.ability.extra.mult,
                     chips = card.ability.extra.chips
-                } 
+                }
             else
-                return{
+                return {
                     chips = card.ability.extra.chips
-                } 
+                }
             end
         end
     end

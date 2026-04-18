@@ -51,6 +51,7 @@ SMODS.Joker {
     add_to_deck = function(self, card, from_debuff)
         G.consumeables:change_size(card.ability.extra.consumable_slot)
     end,
+    attributes = {'xmult', 'passive', 'pride'},
     calculate = function(self, card, context)
 
         if context.joker_main then

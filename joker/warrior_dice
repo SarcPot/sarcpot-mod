@@ -1,49 +1,52 @@
 SMODS.Joker {
 
-	discovered = true,
-	key = 'warrior_dice',
+    discovered = true,
+    key = 'warrior_dice',
 
-
-
-	config = {
+    config = {
         extra = {
             n = 1,
             d = 6,
-			free_rerolls = 0,
+            free_rerolls = 0
         }
     },
     loc_vars = function(self, info_queue, card)
-        local n, d = SMODS.get_probability_vars(card, card.ability.extra.n,  card.ability.extra.d, 'warrior_dice')
+        local n, d = SMODS.get_probability_vars(card, card.ability.extra.n, card.ability.extra.d, 'warrior_dice')
         return {
             vars = {n, d}
         }
     end,
-	rarity = 1,
-	atlas = 'sarcpot_atlas',
-	pos = { x = 0, y = 2 },
-	cost = 4,
-	
-	calculate = function(self, card, context)
-		if context.pre_discard then
-			if SMODS.pseudorandom_probability(card, 'warrior_dice_reroll', card.ability.extra.n, card.ability.extra.d, 'warrior_dice') then
-				G.GAME.current_round.free_rerolls = G.GAME.current_round.free_rerolls + 1
-				calculate_reroll_cost(true)
-				return {
-					message = localize('sarc_combat_roll_ex'),
-					colour = G.C.BLUE,
-					sound = "whoosh1"
-				}
-			end
-		end
-		if context.reroll_shop then
-			if SMODS.pseudorandom_probability(card, 'warrior_dice_discard', card.ability.extra.n, card.ability.extra.d, 'warrior_dice') then
-				G.GAME.round_bonus["discards"] = G.GAME.round_bonus["discards"] + 1
-				return {
-					message = localize('sarc_plus_one_discard'),
-					colour = G.C.RED,
-				
-				}
-			end
-		end
-	end
+    rarity = 1,
+    atlas = 'sarcpot_atlas',
+    pos = {
+        x = 0,
+        y = 2
+    },
+    cost = 4,
+    attributes = {'discard', 'chance', 'reroll'},
+    calculate = function(self, card, context)
+        if context.pre_discard then
+            if SMODS.pseudorandom_probability(card, 'warrior_dice_reroll', card.ability.extra.n, card.ability.extra.d,
+                'warrior_dice') then
+                G.GAME.current_round.free_rerolls = G.GAME.current_round.free_rerolls + 1
+                calculate_reroll_cost(true)
+                return {
+                    message = localize('sarc_combat_roll_ex'),
+                    colour = G.C.BLUE,
+                    sound = "whoosh1"
+                }
+            end
+        end
+        if context.reroll_shop then
+            if SMODS.pseudorandom_probability(card, 'warrior_dice_discard', card.ability.extra.n, card.ability.extra.d,
+                'warrior_dice') then
+                G.GAME.round_bonus["discards"] = G.GAME.round_bonus["discards"] + 1
+                return {
+                    message = localize('sarc_plus_one_discard'),
+                    colour = G.C.RED
+
+                }
+            end
+        end
+    end
 }

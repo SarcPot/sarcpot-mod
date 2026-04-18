@@ -32,6 +32,7 @@ SMODS.Joker {
 
         return false
     end,
+    attributes = {'mult', 'pride', 'scaling', 'jack', 'rank'},
     calculate = function(self, card, context)
         if context.before and context.scoring_hand and not context.blueprint then
             local found = false

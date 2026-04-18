@@ -30,6 +30,7 @@ SMODS.Joker {
     add_to_deck = function(self, card, from_debuff)
         G.hand:change_size(-card.ability.extra.handsize_mod)
     end,
+    attributes = {'economy', 'hand_size'},
     calculate = function(self, card, context)
         if context.end_of_round and context.cardarea == G.jokers then
             SARC.apply_multiplier(G.GAME, "interest_amount", card.ability.extra.interest_multiplier,

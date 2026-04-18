@@ -37,6 +37,7 @@ SMODS.Joker {
         end
         return false
     end,
+    attributes = {'balance', 'pride', 'diamonds', 'clubs', 'suit'},
     calculate = function(self, card, context)
 
         if context.individual and context.cardarea == G.play then

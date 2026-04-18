@@ -39,6 +39,7 @@ SMODS.Joker {
 
         return false
     end,
+    attributes = {'chance', 'enhancements', 'mult', 'chips', 'xmult', 'economy', 'pride'},
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play then
             if context.other_card.ability.name == "Wild Card" then

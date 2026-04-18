@@ -1,58 +1,66 @@
 SMODS.Joker {
 
-
     key = 'double_crescent',
 
-   
-
-    config = { extra = { n = 1, d = 2 } },
+    config = {
+        extra = {
+            n = 1,
+            d = 2
+        }
+    },
     loc_vars = function(self, info_queue, card)
-      local n, d = SMODS.get_probability_vars(card, card.ability.extra.n,  card.ability.extra.d, 'double_crescent')
-        return { vars = { n, d } }
+        local n, d = SMODS.get_probability_vars(card, card.ability.extra.n, card.ability.extra.d, 'double_crescent')
+        return {
+            vars = {n, d}
+        }
     end,
     rarity = 2,
     atlas = 'sarcpot_atlas',
-    pos = { x = 3, y = 0 },
+    pos = {
+        x = 3,
+        y = 0
+    },
     cost = 5,
-  
+    attributes = {'pride', 'hand_type', 'planet', 'space', 'chance'},
     calculate = function(self, card, context)
         if context.before and not context.blueprint and not (context.individual or context.repetition) then
-           
+
             local count = {}
             local found = false
-      
-     
+
             for _, v in pairs(context.scoring_hand) do
-              
-              if v.ability.name ~= "Stone Card" then
-                local rank = v:get_id()
-                count[rank] = (count[rank] or 0) + 1
-      
-                if count[rank] >= 2 then
-                  found = true
-                  break
+
+                if v.ability.name ~= "Stone Card" then
+                    local rank = v:get_id()
+                    count[rank] = (count[rank] or 0) + 1
+
+                    if count[rank] >= 2 then
+                        found = true
+                        break
+                    end
                 end
             end
-        end  
-        if SMODS.pseudorandom_probability(card, 'double_crescent', card.ability.extra.n, card.ability.extra.d, 'double_crescent')
-        and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit 
-        and found == true then
-            G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
-            G.E_MANAGER:add_event(Event({
-              trigger = 'before',
-              delay = 0.0,
-              func = function()
-                local card = create_card('Planet', G.consumeables, nil, nil, false, nil, nil, 'double crescent')
-                card:add_to_deck()
-                G.consumeables:emplace(card)
-                G.GAME.consumeable_buffer = 0
-                return true
-              end
-            }))
-            card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil,
-              { message = localize('k_plus_planet'), colour = G.C.SET.Planet })
-          end
-  
-    end
+            if SMODS.pseudorandom_probability(card, 'double_crescent', card.ability.extra.n, card.ability.extra.d,
+                'double_crescent') and #G.consumeables.cards + G.GAME.consumeable_buffer <
+                G.consumeables.config.card_limit and found == true then
+                G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'before',
+                    delay = 0.0,
+                    func = function()
+                        local card = create_card('Planet', G.consumeables, nil, nil, false, nil, nil, 'double crescent')
+                        card:add_to_deck()
+                        G.consumeables:emplace(card)
+                        G.GAME.consumeable_buffer = 0
+                        return true
+                    end
+                }))
+                card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {
+                    message = localize('k_plus_planet'),
+                    colour = G.C.SET.Planet
+                })
+            end
+
+        end
     end
 }

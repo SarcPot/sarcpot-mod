@@ -27,7 +27,7 @@ if SARC.config.consumables_enabled then
             y = 2
         },
         cost = 6,
-
+        attributes = {'chance', 'destroy_card', 'generation', 'tarot', 'planet', 'spectral', 'travel'},
         calculate = function(self, card, context)
             local target = pseudorandom_element(G.consumeables.cards, pseudoseed('inventor_dice'))
 
@@ -121,7 +121,7 @@ else
             y = 2
         },
         cost = 6,
-
+        attributes = {'chance', 'destroy_card', 'generation', 'tarot', 'planet', 'spectral'},
         calculate = function(self, card, context)
             local target = pseudorandom_element(G.consumeables.cards, pseudoseed('inventor_dice'))
 

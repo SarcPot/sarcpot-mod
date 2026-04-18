@@ -21,7 +21,7 @@ SMODS.Joker {
         y = 0
     },
     cost = 7,
-
+    attributes = {'retrigger', 'pride', 'hand_type'},
     calculate = function(self, card, context)
         local count = {}
 

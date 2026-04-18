@@ -21,6 +21,7 @@ SMODS.Joker {
         y = 1
     },
     cost = 7,
+    attributes = {'economy', 'generation', 'tarot'},
     calculate = function(self, card, context)
         if context.money_altered and context.amount >= card.ability.extra.limit then
             G.E_MANAGER:add_event(Event({

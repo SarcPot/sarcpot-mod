@@ -26,6 +26,7 @@ SMODS.Joker {
             vars = {card.ability.extra.x_mult, card.ability.extra.planets_used, card.ability.extra.planets_needed}
         }
     end,
+    attributes = {'xmult', 'planet'},
     calculate = function(self, card, context)
         if context.using_consumeable and context.consumeable.ability.set == "Planet" and not context.blueprint_compat and
             card.ability.extra.active == false then

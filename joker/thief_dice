@@ -24,7 +24,7 @@ SMODS.Joker {
         y = 2
     },
     cost = 3,
-
+    attributes = {'chance', 'sell_cost', 'economy'},
     calculate = function(self, card, context)
         if context.setting_blind then
             ease_dollars(-card.ability.extra.steal_value)

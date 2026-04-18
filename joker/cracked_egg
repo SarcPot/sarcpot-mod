@@ -1,43 +1,52 @@
 SMODS.Joker {
 
-
     key = 'cracked_egg',
 
-    config = { extra = { current_rarity = 0, boss_blinds = 0 } },
+    config = {
+        extra = {
+            current_rarity = 0,
+            boss_blinds = 0
+        }
+    },
     loc_vars = function(self, info_queue, card)
         local rarity = ''
         if card.ability.extra.current_rarity == 0 then
             rarity = localize('sarc_common')
         elseif card.ability.extra.current_rarity == 1 then
             rarity = localize('sarc_uncommon')
-        else 
+        else
             rarity = localize('sarc_rare')
         end
-        return { vars = {rarity, card.ability.extra.boss_blinds} }
+        return {
+            vars = {rarity, card.ability.extra.boss_blinds}
+        }
     end,
     rarity = 1,
     atlas = 'sarcpot_atlas',
-    pos = { x = 0, y = 1 },
+    pos = {
+        x = 0,
+        y = 1
+    },
     cost = 2,
     eternal_compat = false,
     pools = {
         Food = true
-      },
-    
+    },
+    attributes = {'food', 'on_sell', 'generation', 'destroy_card', 'pride'},
     calculate = function(self, card, context)
-        --Selects joker to the right
+        -- Selects joker to the right
         local other_joker
 
         for i = 1, #G.jokers.cards do
-            if G.jokers.cards[i] == card then other_joker = G.jokers.cards[i + 1] or nil end
+            if G.jokers.cards[i] == card then
+                other_joker = G.jokers.cards[i + 1] or nil
+            end
         end
 
+        -- juices if it is at its max rarity
 
-        --juices if it is at its max rarity
-      
-       
-
-        if context.end_of_round and G.GAME.blind.boss and not context.blueprint and not context.individual and not context.repetition then
+        if context.end_of_round and G.GAME.blind.boss and not context.blueprint and not context.individual and
+            not context.repetition then
             if card.ability.extra.boss_blinds < 2 then
                 card.ability.extra.boss_blinds = card.ability.extra.boss_blinds + 1
             end
@@ -45,11 +54,13 @@ SMODS.Joker {
                 card.ability.extra.current_rarity = 1
             elseif card.ability.extra.boss_blinds >= 2 then
                 card.ability.extra.current_rarity = 2
-                
-                    local eval = function(card) return not card.REMOVED end
-                    juice_card_until(card, eval, true)
-            
-            end   
+
+                local eval = function(card)
+                    return not card.REMOVED
+                end
+                juice_card_until(card, eval, true)
+
+            end
 
         end
 
@@ -79,8 +90,7 @@ SMODS.Joker {
                         area = G.jokers,
                         set = 'Joker',
                         rarity = rarity,
-                        edition =
-                            edition,
+                        edition = edition,
                         stickers = stickers
                     })
                     new_joker:add_to_deck()
@@ -91,7 +101,5 @@ SMODS.Joker {
             }))
         end
     end
-
-
 
 }

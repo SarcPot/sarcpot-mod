@@ -23,7 +23,7 @@ SMODS.Joker {
         y = 1
     },
     cost = 6,
-
+    attributes = {'economy'},
     calculate = function(self, card, context)
         if context.ending_shop and not context.blueprint then
             card.ability.extra.value = math.random(card.ability.extra.min_value, card.ability.extra.max_value)

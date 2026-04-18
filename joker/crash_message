@@ -8,17 +8,22 @@ SMODS.Joker {
     loc_vars = function(self, info_queue, card)
         local total = 0
         if G.playing_cards then
-            for i=1 , #G.playing_cards do
+            for i = 1, #G.playing_cards do
                 if SMODS.has_no_rank(G.playing_cards[i]) then
                     total = total + 1
                 end
             end
         end
         local mult = (total * card.ability.extra.mult_mod) or 0
-        return { vars = {card.ability.extra.mult_mod, mult} }
+        return {
+            vars = {card.ability.extra.mult_mod, mult}
+        }
     end,
     rarity = 2,
-    pos = { x = 2, y = 4 },
+    pos = {
+        x = 2,
+        y = 4
+    },
     atlas = 'sarcpot_atlas',
     cost = 6,
     unlocked = true,
@@ -26,9 +31,9 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = true,
     soul_pos = nil,
-    in_pool = function (self, args)
+    in_pool = function(self, args)
         if G.playing_cards then
-            for i=1 , #G.playing_cards do
+            for i = 1, #G.playing_cards do
                 if SMODS.has_no_rank(G.playing_cards[i]) then
                     return true
                 end
@@ -37,22 +42,23 @@ SMODS.Joker {
 
         return false
     end,
+    attributes = {'mult', 'full_deck', 'pride', 'enhancements'},
     calculate = function(self, card, context)
-        
+
         if context.joker_main then
             local total = 0
-          if G.playing_cards then
-              for i=1 , #G.playing_cards do
-                  if SMODS.has_no_rank(G.playing_cards[i]) then
-                      total = total + 1
-                  end
-              end
-          end
-          if total > 0 then
-            return {
-                mult = total*card.ability.extra.mult_mod
-            }
-        end
+            if G.playing_cards then
+                for i = 1, #G.playing_cards do
+                    if SMODS.has_no_rank(G.playing_cards[i]) then
+                        total = total + 1
+                    end
+                end
+            end
+            if total > 0 then
+                return {
+                    mult = total * card.ability.extra.mult_mod
+                }
+            end
         end
     end
 }

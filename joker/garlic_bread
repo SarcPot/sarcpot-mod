@@ -10,7 +10,7 @@ SMODS.Joker {
         }
     },
     loc_vars = function(self, info_queue, card)
-        local n, d = SMODS.get_probability_vars(card, card.ability.extra.n,  card.ability.extra.d, 'garlic_bread')
+        local n, d = SMODS.get_probability_vars(card, card.ability.extra.n, card.ability.extra.d, 'garlic_bread')
         return {
             vars = {n, d}
         }
@@ -26,19 +26,18 @@ SMODS.Joker {
     pools = {
         Food = true
     },
-
+    attributes = {'food', 'hand_type', 'ace', 'pride', 'modify_card'},
     calculate = function(self, card, context)
 
+        if context.setting_blind then
+            local eval = function()
+                return G.GAME.current_round.hands_played == 0
+            end
+            juice_card_until(card, eval, true)
+        end
 
-		if context.setting_blind then
-			local eval = function()
-				return G.GAME.current_round.hands_played == 0
-			end
-			juice_card_until(card, eval, true)
-		end
-
-        if context.after and #context.full_hand == 1 and not context.blueprint and
-            G.GAME.current_round.hands_played == 0 then
+        if context.after and #context.full_hand == 1 and not context.blueprint and G.GAME.current_round.hands_played ==
+            0 then
 
             local other_card = context.full_hand[1]
 
@@ -60,14 +59,15 @@ SMODS.Joker {
                 delay = 0.1,
                 blocking = true,
                 func = function()
-                    
+
                     return true
                 end
             }))
         end
         if context.end_of_round and not context.repetition and context.game_over == false and not context.blueprint then
 
-           if SMODS.pseudorandom_probability(card, 'garlic_bread', card.ability.extra.n, card.ability.extra.d, 'garlic_bread') then
+            if SMODS.pseudorandom_probability(card, 'garlic_bread', card.ability.extra.n, card.ability.extra.d,
+                'garlic_bread') then
 
                 G.E_MANAGER:add_event(Event({
                     trigger = 'after',

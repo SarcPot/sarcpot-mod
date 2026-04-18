@@ -1,12 +1,14 @@
 SMODS.Joker {
     key = "stray_pixel",
-    config = {
-    },
+    config = {},
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = G.P_CENTERS.e_polychrome
     end,
     rarity = 1,
-    pos = { x = 1, y = 5 },
+    pos = {
+        x = 1,
+        y = 5
+    },
     atlas = 'sarcpot_atlas',
     cost = 5,
     unlocked = true,
@@ -14,6 +16,7 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = true,
     soul_pos = nil,
+    attributes = {'edition', 'pride'},
     add_to_deck = function(self, card, from_debuff)
         if not card.edition then
             card:set_edition('e_polychrome')

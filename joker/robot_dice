@@ -26,7 +26,7 @@ SMODS.Joker {
         y = 2
     },
     cost = 6,
-
+    attributes = {'mult', 'scaling', 'chance'},
     calculate = function(self, card, context)
         if context.before and context.scoring_hand and not context.blueprint then
             local is_jackpot = false

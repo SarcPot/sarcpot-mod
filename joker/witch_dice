@@ -23,7 +23,7 @@ SMODS.Joker {
         y = 3
     },
     cost = 5,
-
+    attributes = {'discard', 'chips', 'scaling', 'chance'},
     calculate = function(self, card, context)
         if context.pre_discard and not context.blueprint then
             for _, v in pairs(context.full_hand) do

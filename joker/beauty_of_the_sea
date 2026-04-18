@@ -28,6 +28,7 @@ SMODS.Joker {
     in_pool = function(self, args)
         return true
     end,
+    attributes = {'mult', 'discard', 'scaling'},
     calculate = function(self, card, context)
         if context.setting_blind and not context.blueprint then
             G.E_MANAGER:add_event(Event({

@@ -23,7 +23,7 @@ SMODS.Joker {
     blueprint_compat = true,
     eternal_compat = true,
     soul_pos = nil,
-
+    attributes = {'chips', 'space', 'scaling'},
     calculate = function(self, card, context)
 
         if context.before and not context.blueprint then
